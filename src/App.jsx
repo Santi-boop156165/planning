@@ -1,11 +1,10 @@
 import './index.css'
-import LoginPage from './components/pages/LoginPage'
+import Router from './routes/Router'
 function App() {
-
   return (
-    <main>
-      <LoginPage />
-    </main>
+    <>
+      <Router />
+    </>
   )
 }
 

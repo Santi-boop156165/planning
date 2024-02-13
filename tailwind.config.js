@@ -16,7 +16,7 @@ export default {
         ...theme('colors'),
         'start': '#3c1470', 
         'middle': '#4b2f71', 
-        'end': '#615578', 
+        'end': '#817893', 
       }),
     },
   },
