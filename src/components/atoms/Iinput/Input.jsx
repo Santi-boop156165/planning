@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-const Input = ({ holder, size,value, onChange, bgColor }) => {
+const Input = ({ holder, size,value, onChange, bgColor, readOnly }) => {
   const defaultSize = "w-64";
   const sizeClass = size || defaultSize;
   const defaultBgColor = bgColor || "bg-transparent";
   return (
     <input
+      readOnly={readOnly}
     autoFocus
       type="text"
       value={value}
@@ -17,11 +18,12 @@ const Input = ({ holder, size,value, onChange, bgColor }) => {
   );
 };
 Input.propTypes = {
-  holder: PropTypes.string.isRequired,
+  holder: PropTypes.string,
   size: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
   bgColor: PropTypes.string,
+  readOnly: PropTypes.bool,
 };
 
 export default Input;

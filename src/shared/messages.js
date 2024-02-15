@@ -4,7 +4,9 @@ const MESSAGES = {
     INVALID_NAME: "Nombre Inválido!",
     SELECTED_ROLES: "Selecciona Un Role",
     SELECTED_CARD : "Elige Una Carta 👇",
-    SELECTED_CARD_REVEAL : "Carta Seleccionada",
+    SELECTED_CARD_REVEAL : "Cartas Seleccionadas",
+    URL_COPIED: "URL copiada al portapapeles",
+    ERROR_COPYING_URL: "Error al copiar URL: ",
   };
   
   export default MESSAGES;

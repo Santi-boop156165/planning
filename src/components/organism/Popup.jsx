@@ -14,6 +14,7 @@ import { GameContext } from "../../context/GameContextProvider";
 const Popup = ({ onClose }) => {
   const { name } = useParams();
   const { addPlayer  } = useContext(GameContext);
+  
   const [inputValue, setInputValue] = useState("");
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -41,9 +42,7 @@ const Popup = ({ onClose }) => {
   };
 
   return (
-    <form className="bg-[#1f0d3f] w-[420px] h-48 rounded-2xl 
-    py-32 shadow-md shadow-purple-600 border border-purple-500 
-    flex flex-col items-center justify-center ">
+    <form className="popup-user-style ">
       <section className="flex flex-col gap-1">
         <h1 className="text-sm text-white font-bold">Tu Nombre</h1>
         <Input holder={"Santiago"} onChange={handleInputChange} bgColor={"bg-[#240f4a]"} />

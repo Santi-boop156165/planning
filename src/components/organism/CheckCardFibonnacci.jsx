@@ -12,10 +12,17 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
     if (!selectedCard) {
       handlerCardClick(cardOrNumber.numberSelected || cardOrNumber);
     }
-
   };
 
-  const seriesToDisplay = isReveal ? cardSelections : fibonacciSeries;
+  const getUniqueCards = (cards) => {
+    const uniqueNumbers = new Set();
+    return cards.filter(card => {
+      const number = card.numberSelected || card;
+      return uniqueNumbers.has(number) ? false : uniqueNumbers.add(number);
+    });
+  };
+
+  const seriesToDisplay = isReveal ? getUniqueCards(cardSelections) : fibonacciSeries;
 
   return (
     <div className="flex justify-center items-center gap-4 mt-8">
@@ -26,12 +33,10 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
           isSelected={selectedCard === (cardOrNumber.numberSelected || cardOrNumber).toString()}
           onClick={() => onCardClick(cardOrNumber)}
         />
-      ))
-      }
+      ))}
     </div>
   );
 };
-
 CheckCardFibonnacci.propTypes = {
   fibonacciSeries: PropTypes.array.isRequired,
 };

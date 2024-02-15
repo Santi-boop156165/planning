@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 const Button = ({text,size, disabled = false, 
   onClick,textSize,
-  pySize,pxSize, bgColor, textColor, fontBold }) => {
+  pySize,pxSize, bgColor, textColor, fontBold,higth }) => {
   const defaultSize = "w-36"; 
   const sizeClass = size || defaultSize;
+  const hSize = higth || "h-9"; 
   const textSizeClass = textSize || "text-lg";
   const pySizeClass = pySize || "py-2";
   const pxSizeClass = pxSize || "px-4";
@@ -18,7 +19,7 @@ const Button = ({text,size, disabled = false,
        hover:bg-purple-700 ${textColorClass} hover:text-white 
        ${fontBoldClass}  ${pySizeClass} 
       ${pxSizeClass} ${sizeClass} 
-      rounded-2xl shadow-lg hover:shadow-xl transition 
+      rounded-2xl ${hSize} shadow-lg hover:shadow-xl transition 
       duration-150 whitespace-nowrap
       ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
@@ -38,6 +39,7 @@ Button.propTypes = {
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
   fontBold: PropTypes.string,
+  higth: PropTypes.string,
 };
 
 

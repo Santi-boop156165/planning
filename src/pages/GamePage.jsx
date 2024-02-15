@@ -1,4 +1,5 @@
 import Popup from "../components/organism/Popup";
+import PopupSharedLink from "../components/organism/PopupSharedLink";
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Table from "../components/molecules/Table";
@@ -8,6 +9,7 @@ import { GameContext } from "../context/GameContextProvider";
 import MESSAGES from "../shared/messages";
 import { fibonacciSeries } from "../shared/fibonacci";
 import CheckCardFibonnacci from "../components/organism/CheckCardFibonnacci";
+import pragma from "../assets/pragma.png";
 
 const GamePage = () => {
   const { name } = useParams();
@@ -18,10 +20,17 @@ const GamePage = () => {
   } = useContext(GameContext);
 
   const [isPopupVisible, setIsPopupVisible] = useState(true);
+  const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] = useState(false);
   
   const hidePopup = () => {
     setIsPopupVisible(false);
   };
+  const showPopupSharedLink = () => {
+    setIsPopupVisible(true);
+    setIsSharedLinkPopupVisible(true);
+    
+  }
+
 
 
   return (
@@ -32,10 +41,10 @@ const GamePage = () => {
         } transition duration-200 absolute inset-0 flex flex-col`}
       >
         
-        <header className="flex justify-between">
-        <h1 className="text-white text-2xl font-bold m-4">P</h1>
-          <h2 className="text-white text-2xl font-bold mt-4 ml-20">{name}</h2>
-          <div className="flex items-end m-4">
+        <header className="header-gamePage">
+         <img src={pragma} className=" w-[120px] y h-[100px]" />
+          <h2 className="style-h2">{name}</h2>
+          <div className="div-gamePage-header">
             <Button
               text="Invitar Jugadores"
               textSize={"text-sm"}
@@ -43,13 +52,14 @@ const GamePage = () => {
               pySize={"py-1"}
               bgColor={"bg-transparent"}
               textColor={"text-white"}
+              onClick={showPopupSharedLink}
             />
           </div>
         </header>
-        <section className="flex flex-1 flex-col justify-center items-center mt-24">
+        <section className="section-gamePages">
           <Table
           />
-          <div className="flex justify-center items-center gap-4 mt-8">
+          <div className="cardUser-gamePage">
             {players.map((player) => (
               <CardUser
                 key={player.userName}
@@ -59,7 +69,7 @@ const GamePage = () => {
           </div>
         </section>
         <footer className="mb-8">
-        <p className="text-white font-semibold text-2xl text-center">
+        <p className="pharagraph-gamePage">
             {
               isReveal
                 ? MESSAGES.SELECTED_CARD_REVEAL
@@ -72,15 +82,19 @@ const GamePage = () => {
         </footer>
       </article>
       {isPopupVisible && (
-        <div className="absolute inset-0 flex justify-center items-center">
-          <Popup onClose={hidePopup} />
+        <div className="popup-gamePage">
+         {isSharedLinkPopupVisible ? (
+            <PopupSharedLink onClose={hidePopup} />
+          ) : (
+            <Popup onClose={hidePopup} />
+          )}
         </div>
       )}
 {isReveal && (
-  <section className="section-gamePage">
+  <section className="section-gamePage-isReveal">
     <div className="text-center pointer-events-auto">
       <p className="text-white text-xl">Promedio: </p>
-      <p className="text-white text-4xl mt-2 font-bold">{average}</p>
+      <p className="text-white text-4xl mt-2 font-bold">{average ? average.toFixed(2) : 'N/A'}</p>
     </div>
   </section>
 )}

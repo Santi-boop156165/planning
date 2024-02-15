@@ -8,29 +8,42 @@
 }
 
 .style-h2 {
-  @apply text-white text-2xl font-bold mt-4 ml-20
+  @apply text-white text-2xl font-bold mt-4 ml-20 
 }
 
 .header-gamePage {
-@apply flex justify-between
+@apply flex justify-between items-start mt-2
 }
 
-.section-gamePage {
+.header-homePage {
+@apply absolute left-1 top-1 p-4 ml-5
+}
+
+.div-gamePage-header {
+@apply flex items-end m-4
+}
+
+
+.section-gamePages {
 @apply flex flex-1 flex-col justify-center items-center mt-24
 }
 
 .cardUser-gamePage {
-@apply flex justify-center items-center gap-4 mt-8
+@apply flex justify-center items-center gap-4 mt-8 mr-20
 }
 .pharagraph-gamePage {
 @apply text-white font-semibold text-2xl text-center
+}
+
+.pharagraph-homePage {
+@apply text-white font-semibold text-2xl 
 }
 
 .popup-gamePage {
 @apply absolute inset-0 flex justify-center items-center
 }
 
-.section-gamePage {
+.section-gamePage-isReveal {
 @apply absolute right-1 bottom-1 flex flex-col justify-end items-end m-16 pr-20
 }
 
@@ -42,3 +55,23 @@
 @apply text-sm text-white font-bold
 }
 
+.popup-user-style{
+ @apply bg-[#1f0d3f] w-[420px] h-48 rounded-2xl 
+ py-32 shadow-md shadow-purple-600 border border-purple-500 
+ flex flex-col items-center justify-center
+}
+
+.popup-shared-style{
+@apply bg-[#1f0d3f] w-[620px] h-56 rounded-3xl shadow-md shadow-purple-600 border border-purple-500 flex flex-col 
+}
+.container-popup-shared{
+@apply w-full flex justify-between items-center bg-violet-700 px-4 py-2 rounded-t-3xl h-14
+}
+
+.section-popup-shared{
+@apply flex flex-col items-center justify-center mt-5
+}
+
+.table-style{
+@apply relative bg-[#1f0d3f] w-[530px] h-80 rounded-full shadow-2xl flex items-center justify-center
+}

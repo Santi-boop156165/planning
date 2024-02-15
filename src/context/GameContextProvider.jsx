@@ -11,7 +11,7 @@ export function GameContextProvider(props) {
   const [isReveal, setIsReveal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [average, setAverage] = useState(0);
-
+  
 
   useEffect(() => {
     setPlayers(gameEntity);

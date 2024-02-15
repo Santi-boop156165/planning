@@ -11,14 +11,15 @@ const Table = () => {
   } = useContext(GameContext);
   return (
     <>
-      <article className="relative bg-[#1f0d3f] w-[530px] h-80 rounded-full shadow-2xl flex items-center justify-center">
-        {cardSelections.length > 1 && (
+      <article className="table-style">
+        {cardSelections.length > 2 && (
           <Button
             text= {isReveal ? "Reiniciar" : "Revelar Cartas"}
             bgColor="bg-violet-700"
             textColor="text-white"
+            higth={"h-10"}
+            pySize={"px-4"}
             pxSize="px-0"
-            pySize="py-2"
             fontBold="font-semibold"
             onClick={isReveal ? handlerRestarGame : handlerAverageClick}
           />
