@@ -12,6 +12,7 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
     if (!selectedCard) {
       handlerCardClick(cardOrNumber.numberSelected || cardOrNumber);
     }
+
   };
 
   const seriesToDisplay = isReveal ? cardSelections : fibonacciSeries;
@@ -22,7 +23,7 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
         <CardFibonacci
           key={cardOrNumber.id || cardOrNumber}
           number={(cardOrNumber.numberSelected || cardOrNumber).toString()}
-          isSelected={cardOrNumber.numberSelected === selectedCard}
+          isSelected={selectedCard === (cardOrNumber.numberSelected || cardOrNumber).toString()}
           onClick={() => onCardClick(cardOrNumber)}
         />
       ))
