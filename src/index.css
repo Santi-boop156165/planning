@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
+
+
+.style-h1 {
+  @apply text-white text-2xl font-bold m-4
+}
+
+.style-h2 {
+  @apply text-white text-2xl font-bold mt-4 ml-20
+}
+
+.header-gamePage {
+@apply flex justify-between
+}
+
+.section-gamePage {
+@apply flex flex-1 flex-col justify-center items-center mt-24
+}
+
+.cardUser-gamePage {
+@apply flex justify-center items-center gap-4 mt-8
+}
+.pharagraph-gamePage {
+@apply text-white font-semibold text-2xl text-center
+}
+
+.popup-gamePage {
+@apply absolute inset-0 flex justify-center items-center
+}
+
+.section-gamePage {
+@apply absolute right-1 bottom-1 flex flex-col justify-end items-end m-16 pr-20
+}
+
+.container-homePage {
+@apply flex flex-col gap-1
+}
+
+.h1-homePage {
+@apply text-sm text-white font-bold
+}
+

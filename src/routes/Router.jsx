@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import GamePage from "../pages/GamePage";
-import REDIRECT from "../payloads/redirect";
+import REDIRECT from "../shared/redirect";
 const Router = () => {
   return (
     <Routes>

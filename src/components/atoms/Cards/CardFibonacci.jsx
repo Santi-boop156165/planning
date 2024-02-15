@@ -1,10 +1,19 @@
 import propTypes from "prop-types";
-
+import { GameContext } from "../../../context/GameContextProvider";
+import {  useContext } from "react";
 
 
 const CardFibonacci = ({ number, isSelected, onClick }) => {
-    return (
-        <div
+  
+  const { isReveal,cardSelections } = useContext(GameContext);
+  const countSelections = (number) => {
+    const count = cardSelections.filter(card => card.numberSelected === number).length;
+    return count;
+};
+  return (
+      <>
+       <div className="flex flex-col items-center">
+       <div
         onClick={onClick} 
         className={`${
           isSelected ? "bg-purple-400 -translate-y-3 focus:outline-none" : 
@@ -14,6 +23,12 @@ const CardFibonacci = ({ number, isSelected, onClick }) => {
       >
         <p className="text-white font-semibold text-2xl">{number}</p>
       </div>
+      <p><strong className="text-white">{
+        isReveal &&   countSelections(number)
+      }</strong></p>
+       </div>
+  
+      </>
     );
 };
 
@@ -21,6 +36,7 @@ CardFibonacci.propTypes = {
     number: propTypes.string,
     onClick: propTypes.func,
     isSelected: propTypes.bool,
+
 
     
 };

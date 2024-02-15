@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { GameContext } from "../../context/GameContextProvider";
+import { GameContext } from "../../../context/GameContextProvider";
 const CardUser = ({ player }) => {
   const { cardSelections,isReveal } = useContext(GameContext);
   const card = cardSelections.find((cs) => cs.userId === player.id);
