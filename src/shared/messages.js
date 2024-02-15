@@ -3,7 +3,8 @@ const MESSAGES = {
     USER_CREATED : "Usuario Creado :",
     INVALID_NAME: "Nombre Inválido!",
     SELECTED_ROLES: "Selecciona Un Role",
-    SLECTED_CARD : "Elige Una Carta 👇",
+    SELECTED_CARD : "Elige Una Carta 👇",
+    SELECTED_CARD_REVEAL : "Carta Seleccionada",
   };
   
   export default MESSAGES;

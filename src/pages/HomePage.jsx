@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { isValidName } from "../payloads/validationUtils";
-import Button from "../components/atoms/Button";
-import Input from "../components/atoms/Input";
-import MESSAGES from "../payloads/messages";
+import { isValidName } from "../shared/validationUtils";
+import Button from "../components/atoms/Buttons/Button";
+import Input from "../components/atoms/Iinput/Input";
+import MESSAGES from "../shared/messages";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ const HomePage = () => {
      to-end h-screen w-screen flex flex-col items-center justify-center
      "
     >
-      <div className="flex flex-col gap-1">
-        <h1 className=" text-sm text-white font-bold ">Nombra la partida</h1>
+      <div className="container-homePage">
+        <h1 className="h1-homePage">Nombra la partida</h1>
         <Input
           holder={"Sprint 32"}
           value={inputValue}

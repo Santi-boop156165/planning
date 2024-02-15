@@ -1,23 +1,24 @@
-import Input from "../atoms/Input";
+import Input from "../atoms/Iinput/Input";
 import PropTypes from 'prop-types';
-import ROLES from "../../payloads/roles";
-import RadioButton from "../atoms/RadioButton";
-import MESSAGES from "../../payloads/messages";
+import ROLES from "../../shared/roles";
+import RadioButton from "../atoms/Buttons/RadioButton";
+import MESSAGES from "../../shared/messages";
 import { useParams } from "react-router-dom"
-import Button from "../atoms/Button";
+import Button from "../atoms/Buttons/Button";
 import { toast } from "react-hot-toast";
-import { isValidName } from "../../payloads/validationUtils";
+import { isValidName } from "../../shared/validationUtils";
 import { useState,useContext } from "react";
 import { GameContext } from "../../context/GameContextProvider";
 
 
 const Popup = ({ onClose }) => {
   const { name } = useParams();
-  const { addPlayer } = useContext(GameContext);
+  const { addPlayer  } = useContext(GameContext);
   const [inputValue, setInputValue] = useState("");
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
 
   const [selectedRole, setSelectedRole] = useState();
   const handleRadioChange = (e) => {

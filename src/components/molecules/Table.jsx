@@ -1,11 +1,12 @@
-import Button from "../atoms/Button";
-import PropTypes from "prop-types";
+import Button from "../atoms/Buttons/Button";
 import { GameContext } from "../../context/GameContextProvider";
 import { useContext } from "react";
-const Table = ({handlerAverageClick}) => {
+const Table = () => {
   const {
     isReveal,
-    cardSelections
+    cardSelections,
+    handlerAverageClick,
+    handlerRestarGame
 
   } = useContext(GameContext);
   return (
@@ -19,7 +20,7 @@ const Table = ({handlerAverageClick}) => {
             pxSize="px-0"
             pySize="py-2"
             fontBold="font-semibold"
-            onClick={handlerAverageClick}
+            onClick={isReveal ? handlerRestarGame : handlerAverageClick}
           />
         )}
       </article>
@@ -27,9 +28,7 @@ const Table = ({handlerAverageClick}) => {
   );
   
 };
-Table.propTypes = {
-  handlerAverageClick: PropTypes.func.isRequired,
-};
+
 
 
 export default Table;
