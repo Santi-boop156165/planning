@@ -1,37 +1,40 @@
-import Popup from "../components/organism/Popup";
-import PopupSharedLink from "../components/organism/PopupSharedLink";
+import Popup from "../components/organism/popus/Popup";
+import PopupSharedLink from "../components/organism/popus/PopupSharedLink";
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Table from "../components/molecules/Table";
 import CardUser from "../components/atoms/Cards/CardUser";
 import Button from "../components/atoms/Buttons/Button";
+import Profile from "../components/atoms/profile/Profile";
 import { GameContext } from "../context/GameContextProvider";
+import CheckRevealAvarage from "../components/organism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
 import { fibonacciSeries } from "../shared/fibonacci";
 import CheckCardFibonnacci from "../components/organism/CheckCardFibonnacci";
+import CheckVieweProfile from "../components/organism/CheckVieweProfile";
 import pragma from "../assets/pragma.png";
 
 const GamePage = () => {
   const { name } = useParams();
-  const {
-    players,
-    isReveal,
-    average,
-  } = useContext(GameContext);
-
+  const { players, isReveal, currentUser } = useContext(GameContext);
+  let player = players.find((p) => p.userName === currentUser);
   const [isPopupVisible, setIsPopupVisible] = useState(true);
-  const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] = useState(false);
-  
+  const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] =
+    useState(false);
+
   const hidePopup = () => {
     setIsPopupVisible(false);
   };
+
+  const showPopupProfile = () => {
+    setIsSharedLinkPopupVisible(false);
+    setIsPopupVisible(true);
+  };
+
   const showPopupSharedLink = () => {
     setIsPopupVisible(true);
     setIsSharedLinkPopupVisible(true);
-    
-  }
-
-
+  };
 
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
@@ -40,11 +43,11 @@ const GamePage = () => {
           isPopupVisible ? "blur-sm" : ""
         } transition duration-200 absolute inset-0 flex flex-col`}
       >
-        
         <header className="header-gamePage">
-         <img src={pragma} className=" w-[120px] y h-[100px]" />
+          <img src={pragma} className=" w-[120px] y h-[100px]" />
           <h2 className="style-h2">{name}</h2>
           <div className="div-gamePage-header">
+            {currentUser && <Profile onClick={showPopupProfile} />}
             <Button
               text="Invitar Jugadores"
               textSize={"text-sm"}
@@ -57,47 +60,41 @@ const GamePage = () => {
           </div>
         </header>
         <section className="section-gamePages">
-          <Table
-          />
+          <Table />
           <div className="cardUser-gamePage">
-            {players.map((player) => (
-              <CardUser
-                key={player.userName}
-                player={player}
-              />
-            ))}
+            {currentUser &&
+              players
+                .filter((player) => player.role !== "3")
+                .map((player) => (
+                  <CardUser key={player.userName} player={player} />
+                ))}
+            <CheckVieweProfile />
           </div>
         </section>
         <footer className="mb-8">
-        <p className="pharagraph-gamePage">
-            {
-              isReveal
-                ? MESSAGES.SELECTED_CARD_REVEAL
-                : MESSAGES.SELECTED_CARD 
-            }
-          </p>
-          <CheckCardFibonnacci
-            fibonacciSeries={fibonacciSeries}
-            />
+          {player && player.role !== "3" && (
+            <>
+              <p className="pharagraph-gamePage">
+                {isReveal
+                  ? MESSAGES.SELECTED_CARD_REVEAL
+                  : MESSAGES.SELECTED_CARD}
+              </p>
+
+              <CheckCardFibonnacci fibonacciSeries={fibonacciSeries} />
+            </>
+          )}
         </footer>
       </article>
       {isPopupVisible && (
         <div className="popup-gamePage">
-         {isSharedLinkPopupVisible ? (
+          {isSharedLinkPopupVisible ? (
             <PopupSharedLink onClose={hidePopup} />
           ) : (
             <Popup onClose={hidePopup} />
           )}
         </div>
       )}
-{isReveal && (
-  <section className="section-gamePage-isReveal">
-    <div className="text-center pointer-events-auto">
-      <p className="text-white text-xl">Promedio: </p>
-      <p className="text-white text-4xl mt-2 font-bold">{average ? average.toFixed(2) : 'N/A'}</p>
-    </div>
-  </section>
-)}
+      {isReveal && <CheckRevealAvarage />}
     </main>
   );
 };

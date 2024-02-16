@@ -7,6 +7,7 @@ export const GameContext = createContext();
 
 export function GameContextProvider(props) {
   const [players, setPlayers] = useState([]);
+  const [currentUser , setCurrentUser] = useState(null);
   const [cardSelections, setCardSelections] = useState(cardEntity);
   const [isReveal, setIsReveal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -39,6 +40,7 @@ export function GameContextProvider(props) {
       },
     ]);
   }
+
   function selectCard(userName, selectedNumber) {
     const player = players.find((p) => p.userName === userName);
     if (!player) return;
@@ -70,6 +72,14 @@ export function GameContextProvider(props) {
     selectCard("Santiago", number);
   }
 
+  function updatePlayerRole (id, newRole) {
+    setPlayers(prevPlayers =>
+      prevPlayers.map(player =>
+        player.id === id ? { ...player, role: newRole } : player
+      )
+    );
+  }
+  
   function handlerRestarGame() {
     setCardSelections(cardEntity);
     setIsReveal(false);
@@ -91,6 +101,9 @@ export function GameContextProvider(props) {
         handlerCardClick,
         average,
         handlerRestarGame,
+        setCurrentUser,
+        currentUser,
+        updatePlayerRole
 
       }}
     >

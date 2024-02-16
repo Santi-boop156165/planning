@@ -7,6 +7,7 @@ const MESSAGES = {
     SELECTED_CARD_REVEAL : "Cartas Seleccionadas",
     URL_COPIED: "URL copiada al portapapeles",
     ERROR_COPYING_URL: "Error al copiar URL: ",
+    USER_EDITED : "Usuario Editado :",
   };
   
   export default MESSAGES;

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-const RadioButton = ({value,onChange}) => {
+const RadioButton = ({value,onChange,checked}) => {
   return (
     <input 
     required
@@ -7,6 +7,7 @@ const RadioButton = ({value,onChange}) => {
     type="radio"
     name="role"
     value={value}
+    checked={checked}
     className="cursor-pointer appearance-none rounded-full 
     h-4 w-4 border border-gray-300 bg-[#1f0d3f] checked:bg-[#bb7cff]
      checked:border-[#bb7cff] focus:outline-none 
@@ -16,6 +17,7 @@ const RadioButton = ({value,onChange}) => {
 }
 RadioButton.propTypes = {
   value: PropTypes.string.isRequired,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    checked: PropTypes.bool,
 };
 export default RadioButton

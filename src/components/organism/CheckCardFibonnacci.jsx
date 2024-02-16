@@ -25,7 +25,7 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
   const seriesToDisplay = isReveal ? getUniqueCards(cardSelections) : fibonacciSeries;
 
   return (
-    <div className="flex justify-center items-center gap-4 mt-8">
+    <div className="card-check-fibonacci">
       {seriesToDisplay.map((cardOrNumber) => (
         <CardFibonacci
           key={cardOrNumber.id || cardOrNumber}

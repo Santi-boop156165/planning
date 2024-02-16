@@ -20,7 +20,7 @@
 }
 
 .div-gamePage-header {
-@apply flex items-end m-4
+@apply flex  m-4 
 }
 
 
@@ -74,4 +74,16 @@
 
 .table-style{
 @apply relative bg-[#1f0d3f] w-[530px] h-80 rounded-full shadow-2xl flex items-center justify-center
+}
+
+.card-check-fibonacci{
+@apply flex justify-center items-center gap-4 mt-8
+}
+
+.profile-style{
+@apply bg-blue-300 mr-4 p-2 rounded-full text-white text-xl font-bold h-10 w-10 flex items-center justify-center cursor-pointer
+}
+
+.viewer-style{
+@apply bg-blue-300 mr-4 p-2 rounded-full text-white text-xl font-bold h-14 w-14 flex items-center justify-center cursor-pointer
 }

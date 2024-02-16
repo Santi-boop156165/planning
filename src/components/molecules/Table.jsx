@@ -6,13 +6,17 @@ const Table = () => {
     isReveal,
     cardSelections,
     handlerAverageClick,
-    handlerRestarGame
+    handlerRestarGame,
+    players,
+    currentUser,
 
   } = useContext(GameContext);
+
+  let player = players.find((p) => p.userName === currentUser);
   return (
     <>
       <article className="table-style">
-        {cardSelections.length > 2 && (
+        {cardSelections.length > 2 && player && player.role !== "2" && (
           <Button
             text= {isReveal ? "Reiniciar" : "Revelar Cartas"}
             bgColor="bg-violet-700"

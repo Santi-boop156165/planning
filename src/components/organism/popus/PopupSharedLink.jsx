@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import Button from "../atoms/Buttons/Button";
-import Input from "../atoms/Iinput/Input";
+import Button from "../../atoms/Buttons/Button";
+import Input from "../../atoms/Iinput/Input";
 import toast from "react-hot-toast";
-import MESSAGES from "../../shared/messages";
+import MESSAGES from "../../../shared/messages";
 const PopupSharedLink = ({ onClose }) => {
   const handleCopy = async (e) => {
     e.preventDefault();
