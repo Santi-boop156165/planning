@@ -9,9 +9,6 @@ export const gameEntity = [
 ]
 
 export const cardEntity = [
-    {
-        id : 0,
-        userId : 0,
-        numberSelected : "10",
-    }
+    
+  
 ]

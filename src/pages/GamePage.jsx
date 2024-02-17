@@ -1,6 +1,6 @@
 import Popup from "../components/organism/popus/Popup";
 import PopupSharedLink from "../components/organism/popus/PopupSharedLink";
-import { useState, useContext } from "react";
+import {  useContext } from "react";
 import { useParams } from "react-router-dom";
 import Table from "../components/molecules/Table";
 import CardUser from "../components/atoms/Cards/CardUser";
@@ -26,8 +26,10 @@ const GamePage = () => {
     showPopupSharedLink,
     isSharedLinkPopupVisible,
     hidePopup,
+    showPopupOtherUser
   } = useContext(GameContextPopup);
   let player = players.find((p) => p.userName === currentUser);
+
 
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
@@ -59,7 +61,10 @@ const GamePage = () => {
               players
                 .filter((player) => player.role !== "3")
                 .map((player) => (
-                  <CardUser key={player.userName} player={player} />
+                  <CardUser key={player.userName} 
+                  onClick = {() => showPopupOtherUser(player)}
+                  player={player}
+                   />
                 ))}
             <CheckVieweProfile />
           </div>

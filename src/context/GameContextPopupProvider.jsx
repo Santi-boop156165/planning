@@ -14,6 +14,9 @@ export function GameContextPopupProvider(props) {
   const [isPopupVisible, setIsPopupVisible] = useState(true);
   const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] =
     useState(false);
+  const [isOtherUser, setIsOtherUser] = useState(false);
+  const [otherUser, setOtherUser] = useState({});
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -26,25 +29,37 @@ export function GameContextPopupProvider(props) {
     setSelectedRole(e.target.value);
   };
 
-  const hidePopup = () => {
-    setIsPopupVisible(false);
-  };
 
   const showPopupProfile = () => {
-    if(isReveal){
-      return
+    if (isReveal) {
+      return;
     }
     setIsSharedLinkPopupVisible(false);
     setIsPopupVisible(true);
   };
 
   const showPopupSharedLink = () => {
-    if(isReveal){
-      return
+    if (isReveal) {
+      return;
     }
     setIsPopupVisible(true);
     setIsSharedLinkPopupVisible(true);
   };
+
+  const showPopupOtherUser = (player) => {
+    if (currentUser === player.userName) {
+      return;
+    }
+    setIsOtherUser(true);
+    setOtherUser(player);
+    setIsPopupVisible(true);
+  };
+
+  const hidePopup = () => {
+    setIsOtherUser(false);
+    setIsPopupVisible(false);
+  };
+
 
   return (
     <GameContextPopup.Provider
@@ -59,6 +74,9 @@ export function GameContextPopupProvider(props) {
         showPopupProfile,
         showPopupSharedLink,
         isSharedLinkPopupVisible,
+        isOtherUser,
+        otherUser,
+        showPopupOtherUser,
       }}
     >
       {props.children}

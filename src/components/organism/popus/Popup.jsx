@@ -10,11 +10,34 @@ import { GameContextPopup } from "../../../context/GameContextPopupProvider";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import MESSAGES from "../../../shared/messages";
-
-const Popup = ({ onClose }) => {
+import { useState } from "react";
+const Popup = ({ onClose}) => {
   const { name } = useParams();
-  const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } = useContext(GameContext);
-  const { inputValue, handleInputChange, selectedRole, handleRadioChange,player } = useContext(GameContextPopup)
+  const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } =
+    useContext(GameContext);
+  const {
+    inputValue,
+    handleInputChange,
+    selectedRole,
+    handleRadioChange,
+    player,
+    isOtherUser,
+    otherUser,
+  } = useContext(GameContextPopup);
+
+  const filteredRoles = Object.entries(ROLES).filter(([key]) => {
+    if (isOtherUser) {
+      return parseInt(key) <= 2;
+    }
+    return true;
+  });
+
+  const [selectedRoleOtherUser, setSelectedRoleOtherUser] = useState(
+    otherUser.role
+  );
+  const handleonChangeOtherUser = (e) => {
+    setSelectedRoleOtherUser(e.target.value);
+  };
   const onClick = (e) => {
     e.preventDefault();
 
@@ -37,16 +60,26 @@ const Popup = ({ onClose }) => {
       toast.error(MESSAGES.SELECTED_ROLES);
       return;
     }
-    toast.success(MESSAGES.USER_EDITED + " " + currentUser);
-    updatePlayerRole(player.id, selectedRole);
+
+    if (isOtherUser) {
+      updatePlayerRole(otherUser.id, selectedRoleOtherUser);
+      toast.success(MESSAGES.USER_EDITED + " " + otherUser.userName);
+    } else {
+      updatePlayerRole(player.id, selectedRole);
+      toast.success(MESSAGES.USER_EDITED + " " + currentUser);
+    }
     onClose();
   };
   return (
     <form className="popup-user-style ">
       <section className="flex flex-col gap-1">
-        <h1 className="text-sm text-white font-bold">Tu Nombre :</h1>
+        <h1 className="text-sm text-white font-bold">
+          {isOtherUser ? "Su nombre :" : "Tu Nombre :"}
+        </h1>
         {currentUser ? (
-          <p className="pharagraph-homePage">{currentUser}</p>
+          <p className="pharagraph-homePage">
+            {isOtherUser ? otherUser.userName.toUpperCase() : currentUser.toUpperCase()}
+          </p>
         ) : (
           <Input
             holder={"Santiago"}
@@ -56,18 +89,24 @@ const Popup = ({ onClose }) => {
         )}
       </section>
 
-      <fieldset className="flex flex-row  space-x-4">
-        {Object.entries(ROLES).map(([key, value]) => (
-          <label key={key}>
-            <span className="mr-2 text-sm text-white">{value}</span>
-            <RadioButton
-              checked={selectedRole === key}
-              value={key}
-              onChange={handleRadioChange}
-            />
-          </label>
-        ))}
-      </fieldset>
+   <fieldset className="flex flex-row space-x-4">
+      {filteredRoles.map(([key, value]) => (
+        <label key={key}>
+          <span className="mr-2 text-sm text-white">{value}</span>
+          <RadioButton
+            checked={
+              isOtherUser
+                ? selectedRoleOtherUser.toString() === key
+                : selectedRole === key
+            }
+            value={key}
+            onChange={
+              isOtherUser ? handleonChangeOtherUser : handleRadioChange
+            }
+          />
+        </label>
+      ))}
+    </fieldset>
       <div className="mt-5">
         <Button
           text={currentUser ? "Editar" : "Ingresar"}
