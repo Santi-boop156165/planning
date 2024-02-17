@@ -8,6 +8,7 @@ import Button from "../components/atoms/Buttons/Button";
 import Profile from "../components/atoms/profile/Profile";
 import { GameContext } from "../context/GameContextProvider";
 import { GameContextCard } from "../context/GameContextCardProvider";
+import { GameContextPopup } from "../context/GameContextPopupProvider";
 import CheckRevealAvarage from "../components/organism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
 import { fibonacciSeries } from "../shared/fibonacci";
@@ -19,30 +20,14 @@ const GamePage = () => {
   const { name } = useParams();
   const { players, currentUser } = useContext(GameContext);
   const { isReveal } = useContext(GameContextCard);
+  const {
+    isPopupVisible,
+    showPopupProfile,
+    showPopupSharedLink,
+    isSharedLinkPopupVisible,
+    hidePopup,
+  } = useContext(GameContextPopup);
   let player = players.find((p) => p.userName === currentUser);
-  const [isPopupVisible, setIsPopupVisible] = useState(true);
-  const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] =
-    useState(false);
-
-  const hidePopup = () => {
-    setIsPopupVisible(false);
-  };
-
-  const showPopupProfile = () => {
-    if(isReveal){
-      return
-    }
-    setIsSharedLinkPopupVisible(false);
-    setIsPopupVisible(true);
-  };
-
-  const showPopupSharedLink = () => {
-    if(isReveal){
-      return
-    }
-    setIsPopupVisible(true);
-    setIsSharedLinkPopupVisible(true);
-  };
 
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
