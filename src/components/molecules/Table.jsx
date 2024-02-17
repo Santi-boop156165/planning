@@ -1,22 +1,27 @@
 import Button from "../atoms/Buttons/Button";
 import { GameContext } from "../../context/GameContextProvider";
+import { GameContextCard } from "../../context/GameContextCardProvider";
 import { useContext } from "react";
 const Table = () => {
   const {
-    isReveal,
-    cardSelections,
-    handlerAverageClick,
-    handlerRestarGame,
+
     players,
     currentUser,
 
   } = useContext(GameContext);
 
+  const {
+    isReveal,
+    cardSelections,
+    handlerAverageClick,
+    handlerRestarGame,
+  } = useContext(GameContextCard);
+
   let player = players.find((p) => p.userName === currentUser);
   return (
     <>
       <article className="table-style">
-        {cardSelections.length > 2 && player && player.role !== "2" && (
+        {cardSelections.length > 1 && player && player.role !== "2" && (
           <Button
             text= {isReveal ? "Reiniciar" : "Revelar Cartas"}
             bgColor="bg-violet-700"

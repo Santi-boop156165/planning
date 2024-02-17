@@ -1,12 +1,12 @@
 
 import CardFibonacci from '../atoms/Cards/CardFibonacci';
 import PropTypes from 'prop-types';
-import { GameContext } from "../../context/GameContextProvider";
+import { GameContextCard } from '../../context/GameContextCardProvider';
 import {  useContext } from "react";
 
 
 const CheckCardFibonnacci = ({ fibonacciSeries }) => {
-  const { isReveal, cardSelections, handlerCardClick, selectedCard } = useContext(GameContext);
+  const { isReveal, cardSelections, handlerCardClick, selectedCard } = useContext(GameContextCard);
 
   const onCardClick = (cardOrNumber) => {
     if (!selectedCard) {

@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { gameEntity } from "../services/data";
-import { cardEntity } from "../services/data";
 import PropTypes from "prop-types";
 
 export const GameContext = createContext();
@@ -8,26 +7,13 @@ export const GameContext = createContext();
 export function GameContextProvider(props) {
   const [players, setPlayers] = useState([]);
   const [currentUser , setCurrentUser] = useState(null);
-  const [cardSelections, setCardSelections] = useState(cardEntity);
-  const [isReveal, setIsReveal] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [average, setAverage] = useState(0);
-  
+
 
   useEffect(() => {
     setPlayers(gameEntity);
   }, []);
 
-  function handlerAverageClick() {
-    const selectedCards = cardSelections.map((cs) =>
-      parseInt(cs.numberSelected, 10)
-    );
-    const average =
-      selectedCards.reduce((acc, value) => acc + value, 0) /
-      selectedCards.length;
-    setAverage(average);
-    setIsReveal(true);
-  }
+
 
   function addPlayer(player) {
     setPlayers([
@@ -41,36 +27,7 @@ export function GameContextProvider(props) {
     ]);
   }
 
-  function selectCard(userName, selectedNumber) {
-    const player = players.find((p) => p.userName === userName);
-    if (!player) return;
 
-    setCardSelections((prevSelections) => {
-      const existingSelection = prevSelections.find(
-        (cs) => cs.userId === player.id
-      );
-      if (existingSelection) {
-        return prevSelections.map((cs) =>
-          cs.userId === player.id
-            ? { ...cs, numberSelected: selectedNumber }
-            : cs
-        );
-      } else {
-        return [
-          ...prevSelections,
-          {
-            id: prevSelections.length,
-            userId: player.id,
-            numberSelected: selectedNumber,
-          },
-        ];
-      }
-    });
-  }
-  function handlerCardClick(number) {
-    setSelectedCard(number);
-    selectCard("Santiago", number);
-  }
 
   function updatePlayerRole (id, newRole) {
     setPlayers(prevPlayers =>
@@ -80,12 +37,7 @@ export function GameContextProvider(props) {
     );
   }
   
-  function handlerRestarGame() {
-    setCardSelections(cardEntity);
-    setIsReveal(false);
-    setAverage(0);
-    setSelectedCard(null);
-  }
+
  
 
   return (
@@ -93,14 +45,6 @@ export function GameContextProvider(props) {
       value={{
         players,
         addPlayer,
-        selectCard,
-        cardSelections,
-        handlerAverageClick,
-        isReveal,
-        selectedCard,
-        handlerCardClick,
-        average,
-        handlerRestarGame,
         setCurrentUser,
         currentUser,
         updatePlayerRole

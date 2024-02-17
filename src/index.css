@@ -62,7 +62,7 @@
 }
 
 .popup-shared-style{
-@apply bg-[#1f0d3f] w-[620px] h-56 rounded-3xl shadow-md shadow-purple-600 border border-purple-500 flex flex-col 
+@apply bg-[#1f0d3f] w-[620px] h-56 rounded-3xl shadow-2xl shadow-purple-600 border border-purple-500 flex flex-col 
 }
 .container-popup-shared{
 @apply w-full flex justify-between items-center bg-violet-700 px-4 py-2 rounded-t-3xl h-14

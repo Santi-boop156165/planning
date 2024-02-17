@@ -2,31 +2,22 @@ import Input from "../../atoms/Iinput/Input";
 import PropTypes from "prop-types";
 import ROLES from "../../../shared/roles";
 import RadioButton from "../../atoms/Buttons/RadioButton";
-import MESSAGES from "../../../shared/messages";
-import { useParams } from "react-router-dom";
 import Button from "../../atoms/Buttons/Button";
-import { toast } from "react-hot-toast";
 import { isValidName } from "../../../shared/validationUtils";
-import { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { GameContext } from "../../../context/GameContextProvider";
+import { GameContextPopup } from "../../../context/GameContextPopupProvider";
+import { useContext } from "react";
+import { toast } from "react-hot-toast";
+import MESSAGES from "../../../shared/messages";
 
 const Popup = ({ onClose }) => {
   const { name } = useParams();
-  const { addPlayer, setCurrentUser, currentUser, players,updatePlayerRole } =
-    useContext(GameContext);
-  const player = players.find((p) => p.userName === currentUser);
-  const [inputValue, setInputValue] = useState("");
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const [selectedRole, setSelectedRole] = useState(currentUser ? player.role : null);
-  const handleRadioChange = (e) => {
-    setSelectedRole(e.target.value);
-  };
-
+  const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } = useContext(GameContext);
+  const { inputValue, handleInputChange, selectedRole, handleRadioChange,player } = useContext(GameContextPopup)
   const onClick = (e) => {
     e.preventDefault();
+
     if (!selectedRole) {
       toast.error(MESSAGES.SELECTED_ROLES);
       return;
@@ -40,7 +31,6 @@ const Popup = ({ onClose }) => {
       toast.error(MESSAGES.INVALID_NAME);
     }
   };
-
   const onEditRole = (e) => {
     e.preventDefault();
     if (!selectedRole) {
@@ -50,8 +40,7 @@ const Popup = ({ onClose }) => {
     toast.success(MESSAGES.USER_EDITED + " " + currentUser);
     updatePlayerRole(player.id, selectedRole);
     onClose();
-  }
-
+  };
   return (
     <form className="popup-user-style ">
       <section className="flex flex-col gap-1">
@@ -72,7 +61,7 @@ const Popup = ({ onClose }) => {
           <label key={key}>
             <span className="mr-2 text-sm text-white">{value}</span>
             <RadioButton
-             checked={selectedRole === key}
+              checked={selectedRole === key}
               value={key}
               onChange={handleRadioChange}
             />

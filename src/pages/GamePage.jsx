@@ -7,6 +7,7 @@ import CardUser from "../components/atoms/Cards/CardUser";
 import Button from "../components/atoms/Buttons/Button";
 import Profile from "../components/atoms/profile/Profile";
 import { GameContext } from "../context/GameContextProvider";
+import { GameContextCard } from "../context/GameContextCardProvider";
 import CheckRevealAvarage from "../components/organism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
 import { fibonacciSeries } from "../shared/fibonacci";
@@ -16,7 +17,8 @@ import pragma from "../assets/pragma.png";
 
 const GamePage = () => {
   const { name } = useParams();
-  const { players, isReveal, currentUser } = useContext(GameContext);
+  const { players, currentUser } = useContext(GameContext);
+  const { isReveal } = useContext(GameContextCard);
   let player = players.find((p) => p.userName === currentUser);
   const [isPopupVisible, setIsPopupVisible] = useState(true);
   const [isSharedLinkPopupVisible, setIsSharedLinkPopupVisible] =
@@ -27,11 +29,17 @@ const GamePage = () => {
   };
 
   const showPopupProfile = () => {
+    if(isReveal){
+      return
+    }
     setIsSharedLinkPopupVisible(false);
     setIsPopupVisible(true);
   };
 
   const showPopupSharedLink = () => {
+    if(isReveal){
+      return
+    }
     setIsPopupVisible(true);
     setIsSharedLinkPopupVisible(true);
   };
