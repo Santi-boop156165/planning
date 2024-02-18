@@ -1,35 +1,54 @@
-import Popup from "../components/organism/popus/Popup";
-import PopupSharedLink from "../components/organism/popus/PopupSharedLink";
-import {  useContext } from "react";
+import Popup from "../components/organism/Popups/Popup";
+import PopupSharedLink from "../components/organism/Popups/PopupSharedLink";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import Table from "../components/molecules/Table";
 import CardUser from "../components/atoms/Cards/CardUser";
 import Button from "../components/atoms/Buttons/Button";
-import Profile from "../components/atoms/profile/Profile";
+import Profile from "../components/atoms/Profile/Profile";
 import { GameContext } from "../context/GameContextProvider";
 import { GameContextCard } from "../context/GameContextCardProvider";
 import { GameContextPopup } from "../context/GameContextPopupProvider";
-import CheckRevealAvarage from "../components/organism/CheckRevealAvarage";
+import CheckRevealAvarage from "../components/organism/ChecksOrganism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
 import { fibonacciSeries } from "../shared/fibonacci";
-import CheckCardFibonnacci from "../components/organism/CheckCardFibonnacci";
-import CheckVieweProfile from "../components/organism/CheckVieweProfile";
+import CheckCardFibonnacci from "../components/organism/ChecksOrganism/CheckCardFibonnacci";
+import CheckVieweProfile from "../components/organism/ChecksOrganism/CheckVieweProfile";
 import pragma from "../assets/pragma.png";
 
 const GamePage = () => {
   const { name } = useParams();
   const { players, currentUser } = useContext(GameContext);
-  const { isReveal } = useContext(GameContextCard);
+  const { isReveal,selectedCard } = useContext(GameContextCard);
+
   const {
     isPopupVisible,
     showPopupProfile,
     showPopupSharedLink,
     isSharedLinkPopupVisible,
     hidePopup,
-    showPopupOtherUser
+    showPopupOtherUser,
+
   } = useContext(GameContextPopup);
   let player = players.find((p) => p.userName === currentUser);
+  
+  const handlerShowPopupPlayer = (user) => {
+    if(player.role !== "1" ){
+      return;  
+    }
+    if(selectedCard!==null){
+      return;
+    }
+    showPopupOtherUser(user);
+   
+  };
 
+  const handlerShowPopupProfile = () => {
+    if(selectedCard!==null){
+      return;
+    }
+    showPopupProfile();
+  }
 
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
@@ -42,7 +61,7 @@ const GamePage = () => {
           <img src={pragma} className=" w-[120px] y h-[100px]" />
           <h2 className="style-h2">{name}</h2>
           <div className="div-gamePage-header">
-            {currentUser && <Profile onClick={showPopupProfile} />}
+            {currentUser && <Profile onClick={handlerShowPopupProfile} />}
             <Button
               text="Invitar Jugadores"
               textSize={"text-sm"}
@@ -61,10 +80,11 @@ const GamePage = () => {
               players
                 .filter((player) => player.role !== "3")
                 .map((player) => (
-                  <CardUser key={player.userName} 
-                  onClick = {() => showPopupOtherUser(player)}
-                  player={player}
-                   />
+                  <CardUser
+                    key={player.userName}
+                    onClick={() => handlerShowPopupPlayer(player)}
+                    player={player}
+                  />
                 ))}
             <CheckVieweProfile />
           </div>

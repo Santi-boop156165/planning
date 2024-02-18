@@ -1,7 +1,7 @@
 
-import CardFibonacci from '../atoms/Cards/CardFibonacci';
+import CardFibonacci from '../../atoms/Cards/CardFibonacci';
 import PropTypes from 'prop-types';
-import { GameContextCard } from '../../context/GameContextCardProvider';
+import { GameContextCard } from '../../../context/GameContextCardProvider';
 import {  useContext } from "react";
 
 
@@ -26,12 +26,12 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
 
   return (
     <div className="card-check-fibonacci">
-      {seriesToDisplay.map((cardOrNumber) => (
+      {seriesToDisplay.map((cardEntityOrNumber) => (
         <CardFibonacci
-          key={cardOrNumber.id || cardOrNumber}
-          number={(cardOrNumber.numberSelected || cardOrNumber).toString()}
-          isSelected={selectedCard === (cardOrNumber.numberSelected || cardOrNumber).toString()}
-          onClick={() => onCardClick(cardOrNumber)}
+          key={cardEntityOrNumber.id || cardEntityOrNumber}
+          number={(cardEntityOrNumber.numberSelected || cardEntityOrNumber).toString()}
+          isSelected={selectedCard === (cardEntityOrNumber.numberSelected || cardEntityOrNumber).toString()}
+          onClick={() => onCardClick(cardEntityOrNumber)}
         />
       ))}
     </div>

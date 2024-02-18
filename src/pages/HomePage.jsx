@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { isValidName } from "../shared/validationUtils";
 import Button from "../components/atoms/Buttons/Button";
-import Input from "../components/atoms/Iinput/Input";
+import Input from "../components/atoms/Inputs/Input";
 import MESSAGES from "../shared/messages";
 import pragma from "../assets/pragma.png";
 

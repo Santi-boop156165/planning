@@ -1,4 +1,4 @@
-import Input from "../../atoms/Iinput/Input";
+import Input from "../../atoms/Inputs/Input";
 import PropTypes from "prop-types";
 import ROLES from "../../../shared/roles";
 import RadioButton from "../../atoms/Buttons/RadioButton";
@@ -23,11 +23,16 @@ const Popup = ({ onClose}) => {
     player,
     isOtherUser,
     otherUser,
-  } = useContext(GameContextPopup);
+    setSelectedRole
 
+  } = useContext(GameContextPopup);
+  
   const filteredRoles = Object.entries(ROLES).filter(([key]) => {
     if (isOtherUser) {
       return parseInt(key) <= 2;
+    }
+    if (player && (player.role === "2" || player.role === "3")) {
+      return parseInt(key) >= 2;
     }
     return true;
   });
@@ -54,6 +59,18 @@ const Popup = ({ onClose}) => {
       toast.error(MESSAGES.INVALID_NAME);
     }
   };
+
+  const handlerChangeEditOtherUser = () => {
+    if(selectedRoleOtherUser !== "1"){
+      return;
+    }
+    setSelectedRole("3")
+    updatePlayerRole(player.id, "3");
+    updatePlayerRole(otherUser.id, selectedRoleOtherUser);
+    toast.success(MESSAGES.USER_EDITED + " " + otherUser.userName);
+  }
+  
+
   const onEditRole = (e) => {
     e.preventDefault();
     if (!selectedRole) {
@@ -62,8 +79,7 @@ const Popup = ({ onClose}) => {
     }
 
     if (isOtherUser) {
-      updatePlayerRole(otherUser.id, selectedRoleOtherUser);
-      toast.success(MESSAGES.USER_EDITED + " " + otherUser.userName);
+      handlerChangeEditOtherUser()
     } else {
       updatePlayerRole(player.id, selectedRole);
       toast.success(MESSAGES.USER_EDITED + " " + currentUser);

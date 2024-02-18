@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Button from "../../atoms/Buttons/Button";
-import Input from "../../atoms/Iinput/Input";
+import Input from "../../atoms/Inputs/Input";
 import toast from "react-hot-toast";
 import MESSAGES from "../../../shared/messages";
 const PopupSharedLink = ({ onClose }) => {

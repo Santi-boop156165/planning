@@ -77,6 +77,7 @@ export function GameContextPopupProvider(props) {
         isOtherUser,
         otherUser,
         showPopupOtherUser,
+        setSelectedRole
       }}
     >
       {props.children}
