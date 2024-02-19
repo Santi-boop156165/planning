@@ -1,12 +1,14 @@
 
 import CardFibonacci from '../../atoms/Cards/CardFibonacci';
-import PropTypes from 'prop-types';
 import { GameContextCard } from '../../../context/GameContextCardProvider';
 import {  useContext } from "react";
+import { fibonacciSeries } from '../../../shared/fibonacci';
 
 
-const CheckCardFibonnacci = ({ fibonacciSeries }) => {
+
+const CheckCardFibonnacci = () => {
   const { isReveal, cardSelections, handlerCardClick, selectedCard } = useContext(GameContextCard);
+
 
   const onCardClick = (cardOrNumber) => {
     if (!selectedCard) {
@@ -24,21 +26,20 @@ const CheckCardFibonnacci = ({ fibonacciSeries }) => {
 
   const seriesToDisplay = isReveal ? getUniqueCards(cardSelections) : fibonacciSeries;
 
+
   return (
     <div className="card-check-fibonacci">
       {seriesToDisplay.map((cardEntityOrNumber) => (
         <CardFibonacci
           key={cardEntityOrNumber.id || cardEntityOrNumber}
-          number={(cardEntityOrNumber.numberSelected || cardEntityOrNumber).toString()}
-          isSelected={selectedCard === (cardEntityOrNumber.numberSelected || cardEntityOrNumber).toString()}
+          number={(cardEntityOrNumber.numberSelected || cardEntityOrNumber)}
+          isSelected={selectedCard === (cardEntityOrNumber.numberSelected || cardEntityOrNumber)}
           onClick={() => onCardClick(cardEntityOrNumber)}
         />
       ))}
     </div>
   );
 };
-CheckCardFibonnacci.propTypes = {
-  fibonacciSeries: PropTypes.array.isRequired,
-};
+
 
 export default CheckCardFibonnacci;

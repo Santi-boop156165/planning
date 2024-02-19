@@ -57,6 +57,7 @@ export function GameContextPopupProvider(props) {
 
   const hidePopup = () => {
     setIsOtherUser(false);
+    setIsSharedLinkPopupVisible(false);
     setIsPopupVisible(false);
   };
 

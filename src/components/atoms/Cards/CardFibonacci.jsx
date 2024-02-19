@@ -13,7 +13,7 @@ const CardFibonacci = ({ number, isSelected, onClick }) => {
 };
   return (
       <>
-       <div className="flex flex-col items-center">
+       <div className="flex flex-col items-center animate-fadeIn">
        <div
         onClick={onClick} 
         className={`${

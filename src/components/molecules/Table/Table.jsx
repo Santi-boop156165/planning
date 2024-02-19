@@ -1,6 +1,6 @@
-import Button from "../atoms/Buttons/Button";
-import { GameContext } from "../../context/GameContextProvider";
-import { GameContextCard } from "../../context/GameContextCardProvider";
+import Button from "../../atoms/Buttons/Button";
+import { GameContext } from "../../../context/GameContextProvider";
+import { GameContextCard } from "../../../context/GameContextCardProvider";
 import { useContext } from "react";
 const Table = () => {
   const {
@@ -22,7 +22,8 @@ const Table = () => {
     <>
       <article className="table-style">
         {cardSelections.length > 1 && player && player.role !== "2" && (
-          <Button
+        <div className=" animate-fadeIn">
+            <Button
             text= {isReveal ? "Reiniciar" : "Revelar Cartas"}
             bgColor="bg-violet-700"
             textColor="text-white"
@@ -32,6 +33,7 @@ const Table = () => {
             fontBold="font-semibold"
             onClick={isReveal ? handlerRestarGame : handlerAverageClick}
           />
+        </div>
         )}
       </article>
     </>

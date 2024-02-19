@@ -2,7 +2,7 @@ import Popup from "../components/organism/Popups/Popup";
 import PopupSharedLink from "../components/organism/Popups/PopupSharedLink";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import Table from "../components/molecules/Table";
+import Table from "../components/molecules/Table/Table";
 import CardUser from "../components/atoms/Cards/CardUser";
 import Button from "../components/atoms/Buttons/Button";
 import Profile from "../components/atoms/Profile/Profile";
@@ -11,9 +11,10 @@ import { GameContextCard } from "../context/GameContextCardProvider";
 import { GameContextPopup } from "../context/GameContextPopupProvider";
 import CheckRevealAvarage from "../components/organism/ChecksOrganism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
-import { fibonacciSeries } from "../shared/fibonacci";
 import CheckCardFibonnacci from "../components/organism/ChecksOrganism/CheckCardFibonnacci";
 import CheckVieweProfile from "../components/organism/ChecksOrganism/CheckVieweProfile";
+import ROLES from "../shared/roles";
+
 import pragma from "../assets/pragma.png";
 
 const GamePage = () => {
@@ -33,7 +34,7 @@ const GamePage = () => {
   let player = players.find((p) => p.userName === currentUser);
   
   const handlerShowPopupPlayer = (user) => {
-    if(player.role !== "1" ){
+    if(player.role !== ROLES.Admin ){
       return;  
     }
     if(selectedCard!==null){
@@ -78,7 +79,7 @@ const GamePage = () => {
           <div className="cardUser-gamePage">
             {currentUser &&
               players
-                .filter((player) => player.role !== "3")
+                .filter((player) => player.role !== ROLES.Espectador)
                 .map((player) => (
                   <CardUser
                     key={player.userName}
@@ -90,7 +91,9 @@ const GamePage = () => {
           </div>
         </section>
         <footer className="mb-8">
-          {player && player.role !== "3" && (
+
+
+          {player && player.role !== ROLES.Espectador && (
             <>
               <p className="pharagraph-gamePage">
                 {isReveal
@@ -98,7 +101,7 @@ const GamePage = () => {
                   : MESSAGES.SELECTED_CARD}
               </p>
 
-              <CheckCardFibonnacci fibonacciSeries={fibonacciSeries} />
+              <CheckCardFibonnacci  />
             </>
           )}
         </footer>

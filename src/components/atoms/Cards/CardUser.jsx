@@ -16,7 +16,8 @@ const CardUser = ({ player, onClick }) => {
         onClick={onClick}
       className=" cursor-pointer
       flex flex-col items-center justify-center ml-24">
-      <div className={`${bgColorClass} transition duration-300 ease-in-out h-14 w-8 border border-purple-500 rounded-md flex items-center justify-center`}>
+      <div className={`${bgColorClass} transition duration-300 ease-in-out h-14 w-8 border
+       border-purple-500 rounded-md flex items-center justify-center`}>
         {isReveal && card && <p className="text-white font-bold">{card.numberSelected}</p>}
       </div>
         <p className="text-center text-white mt-2">{player.userName}</p>

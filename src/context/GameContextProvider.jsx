@@ -7,7 +7,7 @@ export const GameContext = createContext();
 export function GameContextProvider(props) {
   const [players, setPlayers] = useState([]);
   const [currentUser , setCurrentUser] = useState(null);
-
+  const [selectedSeries, setSelectedSeries] = useState('fibonacci');
 
   useEffect(() => {
     setPlayers(gameEntity);
@@ -47,7 +47,9 @@ export function GameContextProvider(props) {
         addPlayer,
         setCurrentUser,
         currentUser,
-        updatePlayerRole
+        updatePlayerRole,
+        selectedSeries,
+        setSelectedSeries
 
       }}
     >

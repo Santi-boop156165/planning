@@ -7,10 +7,10 @@ import { isValidName } from "../../../shared/validationUtils";
 import { useParams } from "react-router-dom";
 import { GameContext } from "../../../context/GameContextProvider";
 import { GameContextPopup } from "../../../context/GameContextPopupProvider";
-import { useContext } from "react";
+import { useContext,useState} from "react";
 import { toast } from "react-hot-toast";
 import MESSAGES from "../../../shared/messages";
-import { useState } from "react";
+
 const Popup = ({ onClose}) => {
   const { name } = useParams();
   const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } =
@@ -27,12 +27,13 @@ const Popup = ({ onClose}) => {
 
   } = useContext(GameContextPopup);
   
-  const filteredRoles = Object.entries(ROLES).filter(([key]) => {
+  const filteredRoles = Object.entries(ROLES).filter(([, roleValue]) => {
+    const roleNumber = parseInt(roleValue, 10);
     if (isOtherUser) {
-      return parseInt(key) <= 2;
+      return roleNumber <= 2;
     }
-    if (player && (player.role === "2" || player.role === "3")) {
-      return parseInt(key) >= 2;
+    if (player && (player.role === ROLES.Jugador || player.role === ROLES.Espectador)) {
+      return roleNumber >= 2;
     }
     return true;
   });
@@ -43,29 +44,32 @@ const Popup = ({ onClose}) => {
   const handleonChangeOtherUser = (e) => {
     setSelectedRoleOtherUser(e.target.value);
   };
-  const onClick = (e) => {
+
+ const onClick = (e) => {
     e.preventDefault();
 
     if (!selectedRole) {
       toast.error(MESSAGES.SELECTED_ROLES);
       return;
     }
-    if (isValidName(inputValue)) {
-      toast.success(MESSAGES.USER_CREATED + " " + inputValue);
-      addPlayer({ partyName: name, userName: inputValue, role: selectedRole });
-      setCurrentUser(inputValue);
-      onClose();
-    } else {
-      toast.error(MESSAGES.INVALID_NAME);
-    }
-  };
 
-  const handlerChangeEditOtherUser = () => {
-    if(selectedRoleOtherUser !== "1"){
+    if (!isValidName(inputValue)) {
+      toast.error(MESSAGES.INVALID_NAME);
       return;
     }
-    setSelectedRole("3")
-    updatePlayerRole(player.id, "3");
+
+    toast.success(`${MESSAGES.USER_CREATED} ${inputValue}`);
+    addPlayer({ partyName: name, userName: inputValue, role: selectedRole });
+    setCurrentUser(inputValue);
+    onClose();
+};
+
+  const handlerChangeEditOtherUser = () => {
+    if(selectedRoleOtherUser !== ROLES.Admin){
+      return;
+    }
+    setSelectedRole(ROLES.Espectador)
+    updatePlayerRole(player.id, ROLES.Espectador);
     updatePlayerRole(otherUser.id, selectedRoleOtherUser);
     toast.success(MESSAGES.USER_EDITED + " " + otherUser.userName);
   }
@@ -108,14 +112,14 @@ const Popup = ({ onClose}) => {
    <fieldset className="flex flex-row space-x-4">
       {filteredRoles.map(([key, value]) => (
         <label key={key}>
-          <span className="mr-2 text-sm text-white">{value}</span>
+          <span className="mr-2 text-sm text-white">{key}</span>
           <RadioButton
             checked={
               isOtherUser
-                ? selectedRoleOtherUser.toString() === key
-                : selectedRole === key
+                ? selectedRoleOtherUser === value
+                : selectedRole === value
             }
-            value={key}
+            value={value}
             onChange={
               isOtherUser ? handleonChangeOtherUser : handleRadioChange
             }

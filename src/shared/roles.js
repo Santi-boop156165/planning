@@ -1,6 +1,6 @@
 const ROLES = {
-    1: 'Admin',
-    2: 'Jugador',
-    3: 'Espectador'
+    Admin: "1",
+    Jugador: "2",
+    Espectador: "3"
 };
 export default ROLES;

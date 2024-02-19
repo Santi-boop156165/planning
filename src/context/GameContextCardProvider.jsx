@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const GameContextCard = createContext();
 
 export function GameContextCardProvider(props) {
-    const { players } = useContext(GameContext);
+    const { players,currentUser } = useContext(GameContext);
     const [cardSelections, setCardSelections] = useState(cardEntity);
     const [isReveal, setIsReveal] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
@@ -42,7 +42,7 @@ export function GameContextCardProvider(props) {
 
       function handlerCardClick(number) {
         setSelectedCard(number);
-        selectCard("Santiago", number);
+        selectCard(currentUser, number);
       }
       function handlerRestarGame() {
         setCardSelections(cardEntity);

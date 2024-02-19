@@ -17,7 +17,6 @@ const HomePage = () => {
   const onClick = () => {
     if (isValidName(inputValue)) {
       toast.success(MESSAGES.GAME_CREATED);
-      console.log(inputValue);
       navigate(`/game/${inputValue}`);
     } else {
       toast.error(MESSAGES.INVALID_NAME);

@@ -20,8 +20,8 @@ const Button = ({text,size, disabled = false,
        ${fontBoldClass}  ${pySizeClass} 
       ${pxSizeClass} ${sizeClass} 
       rounded-2xl ${hSize} shadow-lg hover:shadow-xl transition 
-      duration-150 whitespace-nowrap
-      ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      duration-300 whitespace-nowrap
+      ${disabled ? 'opacity-50 cursor-not-allowed' : 'opacity-100 animate-fadeIn'}`}
     >
       <p>{text}</p> 
     </button>
