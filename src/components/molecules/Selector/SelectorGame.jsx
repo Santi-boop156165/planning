@@ -8,7 +8,7 @@ const SelectorGame = () => {
     };
   
     return (
-      <div>
+      <>
       <select name="selector" id="selector" onChange={(e) =>  handleChange(e)}>
         {Object.entries(SELECTOR_GAME).map(([key, value]) => (
           <option key={key} value={value}>
@@ -16,7 +16,7 @@ const SelectorGame = () => {
           </option>
         ))}
       </select>
-    </div>
+    </>
       );
     };
     

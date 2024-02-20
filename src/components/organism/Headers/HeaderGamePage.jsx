@@ -4,6 +4,7 @@ import Profile from "../../atoms/Profile/Profile";
 import { useContext } from "react";
 import { GameContext } from "../../../context/GameContextProvider";
 import { GameContextPopup } from "../../../context/GameContextPopupProvider";
+import { GameContextCard } from "../../../context/GameContextCardProvider";
 import { useParams } from "react-router-dom";
 
 
@@ -12,12 +13,13 @@ const HeaderGamePage = () => {
     const {  currentUser } = useContext(GameContext);
     const {
       showPopupSharedLink,
-      selectedCard,
       showPopupProfile
 
     } = useContext(GameContextPopup);
+    const { selectedCard } = useContext(GameContextCard);
     const handlerShowPopupProfile = () => {
       if(selectedCard!==null){
+        console.log("handlerShowPopupProfile selectedCard!==null");
         return;
       }
       showPopupProfile();
