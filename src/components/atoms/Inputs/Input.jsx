@@ -5,6 +5,7 @@ const Input = ({ holder, size,value, onChange, bgColor, readOnly }) => {
   const defaultBgColor = bgColor || "bg-transparent";
   return (
     <input
+    data-testid="input-usuario"
       readOnly={readOnly}
     autoFocus
       type="text"

@@ -13,6 +13,7 @@ const Button = ({text,size, disabled = false,
   const fontBoldClass = fontBold || "font-bold";
   return (
     <button 
+      data-testid= "button-test"
       onClick={onClick}
       disabled={disabled}
       className={`${defaultBgColor} ${textSizeClass}

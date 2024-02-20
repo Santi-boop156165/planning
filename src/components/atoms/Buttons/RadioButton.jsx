@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 const RadioButton = ({value,onChange,checked}) => {
   return (
     <input 
+    data-testid="input-radio"
     required
     onChange={onChange}
     type="radio"

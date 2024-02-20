@@ -32,7 +32,7 @@ const HomePage = () => {
       <header className="header-homePage">
         <div className="flex items-center ">
           <img src={pragma} className="w-[120px] y h-[100px]" />
-        <p className="text-white text-2xl font-semibold">Crear Partida</p>
+          <p className="text-white text-2xl font-semibold">Crear Partida</p>
         </div>
       </header>
       <div className="container-homePage">
@@ -44,8 +44,8 @@ const HomePage = () => {
         />
       </div>
       <Button
-      higth={"h-10"}
-      pySize={"px-4"}
+        higth={"h-10"}
+        pySize={"px-4"}
         text={"Crear Partida"}
         disabled={inputValue === ""}
         onClick={onClick}

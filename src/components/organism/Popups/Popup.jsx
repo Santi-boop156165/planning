@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import MESSAGES from "../../../shared/messages";
 
 const Popup = ({ onClose}) => {
+
   const { name } = useParams();
   const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } =
     useContext(GameContext);
@@ -26,7 +27,7 @@ const Popup = ({ onClose}) => {
     setSelectedRole
 
   } = useContext(GameContextPopup);
-  
+
   const filteredRoles = Object.entries(ROLES).filter(([, roleValue]) => {
     const roleNumber = parseInt(roleValue, 10);
     if (isOtherUser) {
@@ -50,14 +51,15 @@ const Popup = ({ onClose}) => {
 
     if (!selectedRole) {
       toast.error(MESSAGES.SELECTED_ROLES);
+
       return;
     }
 
     if (!isValidName(inputValue)) {
+ 
       toast.error(MESSAGES.INVALID_NAME);
       return;
     }
-
     toast.success(`${MESSAGES.USER_CREATED} ${inputValue}`);
     addPlayer({ partyName: name, userName: inputValue, role: selectedRole });
     setCurrentUser(inputValue);
