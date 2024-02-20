@@ -15,7 +15,7 @@ const CardFibonacci = ({ number, isSelected, onClick }) => {
       <>
        <div className="flex flex-col items-center ">
        <div
-        onClick={(e) => onClick(e)} 
+        onClick={ onClick} 
         className={`${
           isSelected ? "bg-purple-400 -translate-y-3 focus:outline-none" : 
           "bg-transparent  hover:animate-flip-x focus:outline-none "
