@@ -10,7 +10,8 @@ const CheckCardFibonnacci = () => {
   const { isReveal, cardSelections, handlerCardClick, selectedCard } = useContext(GameContextCard);
 
 
-  const onCardClick = (cardOrNumber) => {
+  const onCardClick = (cardOrNumber,e) => {
+    e.stopPropagation();
     if (!selectedCard) {
       handlerCardClick(cardOrNumber.numberSelected || cardOrNumber);
     }
@@ -34,7 +35,7 @@ const CheckCardFibonnacci = () => {
           key={cardEntityOrNumber.id || cardEntityOrNumber}
           number={(cardEntityOrNumber.numberSelected || cardEntityOrNumber)}
           isSelected={selectedCard === (cardEntityOrNumber.numberSelected || cardEntityOrNumber)}
-          onClick={() => onCardClick(cardEntityOrNumber)}
+          onClick={(e) => onCardClick(cardEntityOrNumber,e)}
         />
       ))}
     </div>

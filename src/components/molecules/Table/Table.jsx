@@ -28,7 +28,7 @@ const Table = () => {
             bgColor="bg-violet-700"
             textColor="text-white"
             higth={"h-10"}
-            pySize={"px-4"}
+            pySize={"px-0"}
             pxSize="px-0"
             fontBold="font-semibold"
             onClick={isReveal ? handlerRestarGame : handlerAverageClick}

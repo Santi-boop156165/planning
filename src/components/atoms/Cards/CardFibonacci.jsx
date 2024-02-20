@@ -13,18 +13,18 @@ const CardFibonacci = ({ number, isSelected, onClick }) => {
 };
   return (
       <>
-       <div className="flex flex-col items-center animate-fadeIn">
+       <div className="flex flex-col items-center ">
        <div
-        onClick={onClick} 
+        onClick={(e) => onClick(e)} 
         className={`${
           isSelected ? "bg-purple-400 -translate-y-3 focus:outline-none" : 
-          "bg-transparent  transform transition-all duration-200 hover:-translate-y-3 focus:outline-none "
+          "bg-transparent  hover:animate-flip-x focus:outline-none "
         } cursor-pointer shadow-xl h-24 w-14 border border-purple-500 
         rounded-md flex items-center justify-center`}
       >
         <p className="text-white font-semibold text-2xl">{number}</p>
       </div>
-      <p><strong className="text-white">{
+      <p className=""><strong className="text-white">{
         isReveal &&   countSelections(number)
       }</strong></p>
        </div>
