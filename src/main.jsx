@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { GameContextProvider } from "./context/GameContextProvider.jsx";
 import { GameContextCardProvider } from "./context/GameContextCardProvider.jsx";
 import { GameContextPopupProvider } from "./context/GameContextPopupProvider.jsx";
+import { GameContextPopupSecondaryProvider } from "./context/GameContextPopupSecondary.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <GameContextProvider>
       <GameContextCardProvider>
       < GameContextPopupProvider>
+        <GameContextPopupSecondaryProvider>
         <App />
+        </GameContextPopupSecondaryProvider>
         </GameContextPopupProvider>
       </GameContextCardProvider>
     </GameContextProvider>

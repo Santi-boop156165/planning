@@ -3,12 +3,14 @@ import CardUser from '../../atoms/Cards/CardUser'
 import { GameContext } from '../../../context/GameContextProvider'
 import { GameContextPopup } from '../../../context/GameContextPopupProvider'
 import { GameContextCard } from '../../../context/GameContextCardProvider'
+import { GameContextPopupSecondary } from '../../../context/GameContextPopupSecondary'
 import CheckVieweProfile from './CheckVieweProfile'
 
 import ROLES from '../../../shared/roles';
 const CardUserList = () => {
     const { players, currentUser} = useContext(GameContext);
-    const { player,  showPopupOtherUser, } = useContext(GameContextPopup);
+    const { player, } = useContext(GameContextPopup);
+    const { showPopupOtherUser } = useContext(GameContextPopupSecondary);
     const { selectedCard } = useContext(GameContextCard);
     const handlerShowPopupPlayer = (user) => {
       if(player.role !== ROLES.Admin ){

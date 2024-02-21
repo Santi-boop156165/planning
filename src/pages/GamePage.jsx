@@ -11,24 +11,16 @@ import CheckRevealAvarage from "../components/organism/ChecksOrganism/CheckRevea
 import MESSAGES from "../shared/messages";
 import CheckCardFibonnacci from "../components/organism/ChecksOrganism/CheckCardFibonnacci";
 import ROLES from "../shared/roles";
-
+import { GameContextPopupSecondary } from "../context/GameContextPopupSecondary";
 
 const GamePage = () => {
-
- 
   const { isReveal } = useContext(GameContextCard);
 
-  const {
-    isPopupVisible,
-    isSharedLinkPopupVisible,
-    hidePopup,
-    player,
-  
+  const { player } = useContext(GameContextPopup);
 
-  } = useContext(GameContextPopup);
-
-  
-
+  const { isPopupVisible, isSharedLinkPopupVisible, hidePopup } = useContext(
+    GameContextPopupSecondary
+  );
 
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
@@ -51,7 +43,7 @@ const GamePage = () => {
                   : MESSAGES.SELECTED_CARD}
               </p>
 
-              <CheckCardFibonnacci  />
+              <CheckCardFibonnacci />
             </>
           )}
         </footer>
