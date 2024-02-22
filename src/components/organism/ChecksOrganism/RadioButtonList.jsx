@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
-import { GameContextPopup } from "../../../context/GameContextPopupProvider";
-import { GameContextPopupSecondary } from "../../../context/GameContextPopupSecondary";
+import { usePopapProfileStore } from '../../../store/popapProfileStore'
+import { usePopapGameStore } from "../../../store/popapGameStore";
 import RadioButton from "../../atoms/Buttons/RadioButton";
 import ROLES from "../../../shared/roles";
 
@@ -9,10 +8,10 @@ const RadioButtonList = ({selectedRoleOtherUser,setSelectedRoleOtherUser}) => {
     const {
         selectedRole,
         handleRadioChange,
-        player,
 
-      } = useContext(GameContextPopup);
-      const { isOtherUser } = useContext(GameContextPopupSecondary);
+      } = usePopapGameStore();
+      const player =  usePopapGameStore(state => state.getCurrentPlayer());
+      const { isOtherUser } = usePopapProfileStore();
     const handleonChangeOtherUser = (e) => {
         setSelectedRoleOtherUser(e.target.value);
       };

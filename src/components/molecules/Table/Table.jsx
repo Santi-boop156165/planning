@@ -1,27 +1,26 @@
 import Button from "../../atoms/Buttons/Button";
-import { GameContext } from "../../../context/GameContextProvider";
-import { GameContextCard } from "../../../context/GameContextCardProvider";
-import { useContext } from "react";
+import { usePlayerStore } from "../../../store/PlayerStore";
+import { useGameCardStore } from "../../../store/gameCardStore";
 const Table = () => {
   const {
 
     players,
     currentUser,
 
-  } = useContext(GameContext);
+  } =  usePlayerStore();
 
   const {
     isReveal,
-    cardSelections,
+    cards,
     handlerAverageClick,
     handlerRestarGame,
-  } = useContext(GameContextCard);
+  } =  useGameCardStore()
 
   let player = players.find((p) => p.userName === currentUser);
   return (
     <>
       <article className="table-style">
-        {cardSelections.length > 1 && player && player.role !== "2" && (
+        {cards.length > 1 && player && player.role !== "2" && (
         <div className=" animate-fadeIn">
             <Button
             text= {isReveal ? "Reiniciar" : "Revelar Cartas"}

@@ -1,30 +1,28 @@
 import HeaderPopup from "../Headers/HeaderPopup";
 import PropTypes from "prop-types";
+import { useState } from 'react';
 import ROLES from "../../../shared/roles";
 import RadioButtonList from "../ChecksOrganism/RadioButtonList";
 import Button from "../../atoms/Buttons/Button";
 import { isValidName } from "../../../shared/validationUtils";
 import { useParams } from "react-router-dom";
-import { GameContext } from "../../../context/GameContextProvider";
-import { GameContextPopup } from "../../../context/GameContextPopupProvider";
-import { GameContextPopupSecondary } from "../../../context/GameContextPopupSecondary";
-import { useContext, useState } from "react";
+import { usePlayerStore } from "../../../store/PlayerStore";
+import { usePopapGameStore } from "../../../store/popapGameStore";
+import { usePopapProfileStore } from "../../../store/popapProfileStore";
 import { toast } from "react-hot-toast";
 import MESSAGES from "../../../shared/messages";
 
 const Popup = ({ onClose }) => {
   const { name } = useParams();
-  const { addPlayer, setCurrentUser, currentUser, updatePlayerRole } =
-    useContext(GameContext);
+  const { addPlayer, updatePlayerRole, setCurrentUser, currentUser } = usePlayerStore();
   const {
     inputValue,
     selectedRole,
-    player,
-
     setSelectedRole,
-  } = useContext(GameContextPopup);
+  } = usePopapGameStore();
+  const player =  usePopapGameStore(state => state.getCurrentPlayer());
 
-  const { isOtherUser, otherUser } = useContext(GameContextPopupSecondary);
+  const { isOtherUser, otherUser } = usePopapProfileStore();
 
   const [selectedRoleOtherUser, setSelectedRoleOtherUser] = useState(
     otherUser.role

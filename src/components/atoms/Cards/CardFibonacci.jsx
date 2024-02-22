@@ -1,12 +1,12 @@
 import propTypes from "prop-types";
+import { useGameCardStore } from "../../../store/gameCardStore";
 
-import { GameContextCard } from "../../../context/GameContextCardProvider";
-import { useContext } from "react";
+
 
 const CardFibonacci = ({ number, isSelected, onClick }) => {
-  const { isReveal, cardSelections } = useContext(GameContextCard);
+  const { isReveal, cards } =  useGameCardStore();
   const countSelections = (number) => {
-    const count = cardSelections.filter(
+    const count = cards.filter(
       (card) => card.numberSelected === number
     ).length;
     return count;

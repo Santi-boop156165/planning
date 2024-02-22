@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
-import { GameContextCard } from "../../../context/GameContextCardProvider";
+import { useGameCardStore } from "../../../store/gameCardStore";
+
 const CardUser = ({ player, onClick }) => {
-  const { cardSelections,isReveal } = useContext(GameContextCard);
-  const card = cardSelections.find((cs) => cs.userId === player.id);
+  const { cards,isReveal } = useGameCardStore();
+  const card = cards.find((cs) => cs.userId === player.id);
   let bgColorClass;
   if (card && !isReveal) {
     bgColorClass = "bg-purple-400"; 

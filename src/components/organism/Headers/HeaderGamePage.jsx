@@ -1,20 +1,19 @@
 import pragma from "../../../assets/pragma.png";
 import Button from "../../atoms/Buttons/Button";
 import Profile from "../../atoms/Profile/Profile";
-import { useContext } from "react";
-import { GameContext } from "../../../context/GameContextProvider";
-import { GameContextPopupSecondary } from "../../../context/GameContextPopupSecondary";
-import { GameContextCard } from "../../../context/GameContextCardProvider";
+import { usePopapProfileStore } from "../../../store/popapProfileStore";
+import { usePlayerStore } from "../../../store/PlayerStore";
+import { useGameCardStore } from "../../../store/gameCardStore";
 import { useParams } from "react-router-dom";
 
 const HeaderGamePage = () => {
-  const { currentUser } = useContext(GameContext);
-  const { showPopupSharedLink, showPopupProfile } = useContext(
-    GameContextPopupSecondary
-  );
-  const { selectedCard } = useContext(GameContextCard);
+  const { currentUser } = usePlayerStore();
+  const { showPopupSharedLink, showPopupProfile } = usePopapProfileStore()
+  const { selectedCard } =  useGameCardStore()
+
   const handlerShowPopupProfile = () => {
-    if (selectedCard !== null) {
+
+    if (selectedCard !== undefined) {
       return;
     }
     showPopupProfile();

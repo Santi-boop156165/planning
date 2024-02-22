@@ -1,8 +1,8 @@
-import { GameContextCard } from "../../../context/GameContextCardProvider";
-import { useContext } from "react";
+
+import { useGameCardStore } from "../../../store/gameCardStore"
 
 const CheckRevealAvarage = () => {
-    const { average } = useContext(GameContextCard);
+    const { average } =  useGameCardStore()
   return (
     <section className="section-gamePage-isReveal">
     <div className="text-center pointer-events-auto">

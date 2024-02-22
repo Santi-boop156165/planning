@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.21.3",
-    "vitest": "^1.2.2"
+    "vitest": "^1.2.2",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",

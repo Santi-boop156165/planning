@@ -1,13 +1,11 @@
 
 import CardFibonacci from '../../atoms/Cards/CardFibonacci';
-import { GameContextCard } from '../../../context/GameContextCardProvider';
-import {  useContext } from "react";
 import { fibonacciSeries } from '../../../shared/fibonacci';
-
+import { useGameCardStore } from '../../../store/gameCardStore';
 
 
 const CheckCardFibonnacci = () => {
-  const { isReveal, cardSelections, handlerCardClick, selectedCard } = useContext(GameContextCard);
+  const { isReveal, cards, handlerCardClick, selectedCard } = useGameCardStore();
 
 
   const onCardClick = (cardOrNumber) => {
@@ -24,7 +22,7 @@ const CheckCardFibonnacci = () => {
     });
   };
 
-  const seriesToDisplay = isReveal ? getUniqueCards(cardSelections) : fibonacciSeries;
+  const seriesToDisplay = isReveal ? getUniqueCards(cards) : fibonacciSeries;
 
 
   return (

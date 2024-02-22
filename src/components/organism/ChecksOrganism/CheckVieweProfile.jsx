@@ -1,8 +1,8 @@
 import Profile from "../../atoms/Profile/Profile";
-import { useContext } from "react";
-import { GameContext } from "../../../context/GameContextProvider";
+
+import { usePlayerStore } from "../../../store/PlayerStore";
 const CheckVieweProfile = () => {
-  const { players, currentUser } = useContext(GameContext);
+  const { players, currentUser } = usePlayerStore();
   let player = players.find((p) => p.userName === currentUser);
   return (
     <>

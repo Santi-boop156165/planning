@@ -1,27 +1,19 @@
 import Popup from "../components/organism/Popups/Popup";
 import PopupSharedLink from "../components/organism/Popups/PopupSharedLink";
-import { useContext } from "react";
 import Table from "../components/molecules/Table/Table";
 import CardUserList from "../components/organism/ChecksOrganism/CardUserList";
 import HeaderGamePage from "../components/organism/Headers/HeaderGamePage";
-
-import { GameContextCard } from "../context/GameContextCardProvider";
-import { GameContextPopup } from "../context/GameContextPopupProvider";
+import { usePopapGameStore } from "../store/popapGameStore";
 import CheckRevealAvarage from "../components/organism/ChecksOrganism/CheckRevealAvarage";
 import MESSAGES from "../shared/messages";
 import CheckCardFibonnacci from "../components/organism/ChecksOrganism/CheckCardFibonnacci";
 import ROLES from "../shared/roles";
-import { GameContextPopupSecondary } from "../context/GameContextPopupSecondary";
-
+import { useGameCardStore } from "../store/gameCardStore";
+import { usePopapProfileStore } from "../store/popapProfileStore";
 const GamePage = () => {
-  const { isReveal } = useContext(GameContextCard);
-
-  const { player } = useContext(GameContextPopup);
-
-  const { isPopupVisible, isSharedLinkPopupVisible, hidePopup } = useContext(
-    GameContextPopupSecondary
-  );
-
+  const { isReveal } =  useGameCardStore()
+  const player =  usePopapGameStore(state => state.getCurrentPlayer());
+  const { isPopupVisible, isSharedLinkPopupVisible, hidePopup } = usePopapProfileStore()
   return (
     <main className="bg-radial-gradient from-start via-almost-end to-end h-screen w-screen relative">
       <article

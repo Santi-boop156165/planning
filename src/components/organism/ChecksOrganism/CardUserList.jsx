@@ -1,22 +1,24 @@
-import  { useContext } from 'react'
 import CardUser from '../../atoms/Cards/CardUser'
-import { GameContext } from '../../../context/GameContextProvider'
-import { GameContextPopup } from '../../../context/GameContextPopupProvider'
-import { GameContextCard } from '../../../context/GameContextCardProvider'
-import { GameContextPopupSecondary } from '../../../context/GameContextPopupSecondary'
+import { usePlayerStore } from '../../../store/PlayerStore'
+import { usePopapGameStore } from '../../../store/popapGameStore'
+import { useGameCardStore } from '../../../store/gameCardStore'
 import CheckVieweProfile from './CheckVieweProfile'
-
+import { usePopapProfileStore } from '../../../store/popapProfileStore'
 import ROLES from '../../../shared/roles';
 const CardUserList = () => {
-    const { players, currentUser} = useContext(GameContext);
-    const { player, } = useContext(GameContextPopup);
-    const { showPopupOtherUser } = useContext(GameContextPopupSecondary);
-    const { selectedCard } = useContext(GameContextCard);
+    const { players, currentUser } = usePlayerStore();
+    const player =  usePopapGameStore(state => state.getCurrentPlayer());
+    const { showPopupOtherUser } = usePopapProfileStore()
+    const { selectedCard } =  useGameCardStore()
+
     const handlerShowPopupPlayer = (user) => {
+      console.log(player )
       if(player.role !== ROLES.Admin ){
+        console.log('no es admin')
         return;  
       }
-      if(selectedCard!==null){
+      if(selectedCard!==undefined){
+      
         return;
       }
       showPopupOtherUser(user);

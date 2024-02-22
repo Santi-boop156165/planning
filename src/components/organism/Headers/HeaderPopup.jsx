@@ -1,14 +1,13 @@
-import { useContext } from "react";
+import { usePopapProfileStore } from "../../../store/popapProfileStore";
 import Input from "../../atoms/Inputs/Input";
-import { GameContext } from "../../../context/GameContextProvider";
-import { GameContextPopup } from "../../../context/GameContextPopupProvider";
-import { GameContextPopupSecondary } from "../../../context/GameContextPopupSecondary";
+import { usePlayerStore } from "../../../store/PlayerStore";
+import { usePopapGameStore } from "../../../store/popapGameStore";
 
 const HeaderPopup = () => {
-  const { currentUser } = useContext(GameContext);
-  const { handleInputChange } = useContext(GameContextPopup);
 
-  const { isOtherUser, otherUser } = useContext(GameContextPopupSecondary);
+  const { handleInputChange } = usePopapGameStore();
+  const { currentUser } = usePlayerStore();
+  const { isOtherUser, otherUser } = usePopapProfileStore();
   return (
     <header>
       <section className="flex flex-col gap-1">
