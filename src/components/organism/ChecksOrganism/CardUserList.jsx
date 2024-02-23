@@ -12,9 +12,7 @@ const CardUserList = () => {
     const { selectedCard } =  useGameCardStore()
 
     const handlerShowPopupPlayer = (user) => {
-      console.log(player )
       if(player.role !== ROLES.Admin ){
-        console.log('no es admin')
         return;  
       }
       if(selectedCard!==undefined){
