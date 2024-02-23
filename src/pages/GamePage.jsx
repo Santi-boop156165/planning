@@ -11,6 +11,7 @@ import ROLES from "../shared/roles";
 import { useGameCardStore } from "../store/gameCardStore";
 import { usePopapProfileStore } from "../store/popapProfileStore";
 const GamePage = () => {
+  
   const { isReveal } =  useGameCardStore()
   const player =  usePopapGameStore(state => state.getCurrentPlayer());
   const { isPopupVisible, isSharedLinkPopupVisible, hidePopup } = usePopapProfileStore()
